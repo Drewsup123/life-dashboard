@@ -1,5 +1,16 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+const Profile = lazy(() => import("./routes/Profile"));
+const BucketList = lazy(() => import("./routes/BucketList"));
+const Finance = lazy(() => import("./routes/Finance"));
+const LandingPage = lazy(() => import("./routes/LandingPage"));
+const Login = lazy(() => import("./routes/Login"));
+const Notes = lazy(() => import("./routes/Notes"));
+const Overview = lazy(() => import("./routes/Overview"));
+const Reminder = lazy(() => import("./routes/Reminder"));
+const Schedule = lazy(() => import("./routes/Schedule"));
+const Todo = lazy(() => import("./routes/Todo"));
+const Subscription = lazy(() => import("./routes/Subscription"));
 
 export interface AppProps {
   
@@ -9,15 +20,18 @@ const App: React.SFC<AppProps> = () => {
   return (
     <div className="Application">
       <Switch>
-        <Route exact path="/" render={() => <h1>home</h1>} />
-        <Route path="/login" render={() => <h1>login</h1>} />
-        <Route path="/finance" render={() => <h1>finance</h1>} />
-        <Route path="/bucket-list" render={() => <h1>Bucket List</h1>} />
-        <Route path="/notes" render={() => <h1>notes</h1>} />
-        <Route path="/schedule" render={() => <h1>Schedule</h1>} />
-        <Route path="/reminders" render={() => <h1>Reminders</h1>} />
-        <Route path="/todo" render={() => <h1>Todo list</h1>} />
-        <Route path="/overview" render={() => <h1>Overview</h1>} />
+        <Suspense fallback={<div>Cacheing page</div>}>
+          <Route exact path="/" render={() => <LandingPage />} />
+          <Route path="/login" render={() => <Login />} />
+          <Route path="/finance" render={() => <Finance />} />
+          <Route path="/bucket-list" render={() => <BucketList />} />
+          <Route path="/notes" render={() => <Notes />} />
+          <Route path="/schedule" render={() => <Schedule />} />
+          <Route path="/reminders" render={() =><Reminder />} />
+          <Route path="/todo" render={() => <Todo />} />
+          <Route path="/overview" render={() => <Overview />} />
+          <Route path="/profile" render={() => <Profile />} />
+        </Suspense>
       </Switch>
     </div>
   );
