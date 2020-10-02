@@ -32,6 +32,7 @@ const App: React.SFC<AppProps> = () => {
           <Route path="/todo" render={() => <Todo />} />
           <Route path="/overview" render={() => <Overview />} />
           <Route path="/profile" render={() => <Profile />} />
+          <Route path="/subscription" render={() => <Subscription />} />
           <Route path="*" render={() => <InvalidRoute />} />
         </Suspense>
       </Switch>
