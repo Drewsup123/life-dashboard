@@ -11,6 +11,7 @@ const Reminder = lazy(() => import("./routes/Reminder"));
 const Schedule = lazy(() => import("./routes/Schedule"));
 const Todo = lazy(() => import("./routes/Todo"));
 const Subscription = lazy(() => import("./routes/Subscription"));
+const InvalidRoute = lazy(() => import("./routes/InvalidRoute"));
 
 export interface AppProps {
   
@@ -31,6 +32,7 @@ const App: React.SFC<AppProps> = () => {
           <Route path="/todo" render={() => <Todo />} />
           <Route path="/overview" render={() => <Overview />} />
           <Route path="/profile" render={() => <Profile />} />
+          <Route path="*" render={() => <InvalidRoute />} />
         </Suspense>
       </Switch>
     </div>
