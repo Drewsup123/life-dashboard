@@ -6,20 +6,21 @@ export interface IProps {
     
 }
 
-const Login: React.SFC<IProps> = () => {
+const Signup: React.SFC<IProps> = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [confirmation, setConfirmation] = React.useState("");
     const [error, setError] = React.useState("");
 
     const handleLogin = () => {
         firebase.auth()
-        .signInWithEmailAndPassword(email, password)
+        .createUserWithEmailAndPassword(email, password)
         .then(response => {
             console.log(response);
         })
         .catch((error: any) => {
             let { code, message } = error;
-            console.log(code, message);
+            console.log("Error : " + code + message);
             setError(message);
         });
     }
@@ -29,9 +30,10 @@ const Login: React.SFC<IProps> = () => {
             <h1>Login Page</h1>
             <TextField onChange={setEmail} value={email} label="Email" placeholder="abc@lifedashboard.com" />
             <TextField onChange={setPassword} value={password} label="Password" placeholder="" type="password" />
-            <Button onPress={handleLogin} variant="primary">Submit</Button>
+            <TextField onChange={setConfirmation} value={confirmation} label="Confirm Password" placeholder="" type="password" />
+            <Button onPress={handleLogin} variant="primary">Sign Up</Button>
         </div>
     );
 }
 
-export default Login;
+export default Signup;

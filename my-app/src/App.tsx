@@ -4,7 +4,8 @@ const Profile = lazy(() => import("./routes/Profile"));
 const BucketList = lazy(() => import("./routes/BucketList"));
 const Finance = lazy(() => import("./routes/Finance"));
 const LandingPage = lazy(() => import("./routes/LandingPage"));
-const Login = lazy(() => import("./routes/Login"));
+const Login = lazy(() => import("./routes/Signup"));
+const Signup = lazy(() => import("./routes/Signup"));
 const Notes = lazy(() => import("./routes/Notes"));
 const Overview = lazy(() => import("./routes/Overview"));
 const Reminder = lazy(() => import("./routes/Reminder"));
@@ -23,6 +24,7 @@ const App: React.SFC<AppProps> = () => {
       <Switch>
         <Suspense fallback={<div>Cacheing page</div>}>
           <Route exact path="/" render={() => <LandingPage />} />
+          <Route path="/signup" render={() => <Signup />} />
           <Route path="/login" render={() => <Login />} />
           <Route path="/finance" render={() => <Finance />} />
           <Route path="/bucket-list" render={() => <BucketList />} />
