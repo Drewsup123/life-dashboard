@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 export interface AppProps {
   
@@ -7,8 +7,10 @@ export interface AppProps {
 
 const App: React.SFC<AppProps> = () => {
   return (
-    <div>
-      <h1>Life Tracker</h1>
+    <div className="Application">
+      <Switch>
+        <Route exact path="/" render={() => <h1>home</h1>} />
+      </Switch>
     </div>
   );
 }
