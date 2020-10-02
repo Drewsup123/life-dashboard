@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 const Profile = lazy(() => import("./routes/Profile"));
 const BucketList = lazy(() => import("./routes/BucketList"));
 const Finance = lazy(() => import("./routes/Finance"));
@@ -33,7 +33,8 @@ const App: React.SFC<AppProps> = () => {
           <Route path="/overview" render={() => <Overview />} />
           <Route path="/profile" render={() => <Profile />} />
           <Route path="/subscription" render={() => <Subscription />} />
-          <Route path="*" render={() => <InvalidRoute />} />
+          <Route path="/invalid-route" render={() => <InvalidRoute />} />
+          {/* <Route path="*" render={() => <Redirect to="/invalid-route" />} /> */}
         </Suspense>
       </Switch>
     </div>
