@@ -55,6 +55,11 @@ const routes: Array<RouteItem> = [
         linkTo: "/subscription",
         label: "Subscription",
         icon: "card_membership"
+    },
+    {
+        linkTo: "/dream-journal",
+        label: "Dream Journal",
+        icon: "online_prediction"
     }
 ]
 
@@ -63,10 +68,7 @@ const SideBar: React.FC<IProps> = () => {
     return (
         <Sidebar className="sidebar" visible={true} position="left" onHide={() => null}>
             <div className="sidebar-content">
-                {
-                    routes.map((route: RouteItem) => <SideBarItem label={route.label} linkTo={route.linkTo} icon={route.icon} />
-                    )
-                }
+                {routes.map((route: RouteItem) => <SideBarItem label={route.label} linkTo={route.linkTo} icon={route.icon} />)}
             </div>
             <div className="sidebar-footer">
                 <SideBarItem label="Profile" icon="account_circle" linkTo="/profile" />
