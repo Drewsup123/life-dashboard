@@ -1,5 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { AppState } from './store';
+import NavigationBar from './components/NavigationBar/NavigationBar';
+import SideBar from './components/SideBar/SideBar';
 const Profile = lazy(() => import("./routes/Profile"));
 const BucketList = lazy(() => import("./routes/BucketList"));
 const Finance = lazy(() => import("./routes/Finance"));
@@ -18,10 +22,11 @@ export interface AppProps {
   
 }
 
-const App: React.SFC<AppProps> = () => {
+const App: React.FC<AppProps> = () => {
   return (
     <div className="Application">
       <Switch>
+        <SideBar />
         <Suspense fallback={<div>Cacheing page</div>}>
           <Route exact path="/" render={() => <LandingPage />} />
           <Route path="/signup" render={() => <Signup />} />
@@ -42,5 +47,11 @@ const App: React.SFC<AppProps> = () => {
     </div>
   );
 }
+
+// const mapStateToProps = (state: AppState) => ({
+//   isAuthenticated: state.
+// })
+
+// export default connect(mapStateToProps, {})(App);
 
 export default App;

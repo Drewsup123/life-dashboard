@@ -1,0 +1,46 @@
+.sidebar-content {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 90vh;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 45px;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    padding-left: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.sidebar-item:hover {
+    color: rgb(2, 2, 202);
+    transition: 0.2s ease-in-out;
+}
+
+.sidebar-item i {
+    font-size: 20px;
+    width: 60px;
+}
+
+.sidebar-item span {
+    font-size: 20px;
+}
+
+.sidebar-item.active {
+    color: rgb(1, 1, 141);
+    border-left: 2px solid  rgb(1, 1, 141);
+}
+
+.ripple-primary .p-ink {
+    background:rgba(1, 1, 141, 0.514);
+}
+
+.ripple-danger .p-ink {
+    background: rgba(255, 0, 0, 0.397);
+}
