@@ -17,6 +17,7 @@ const Reminder = lazy(() => import("./routes/Reminder"));
 const Schedule = lazy(() => import("./routes/Schedule"));
 const Todo = lazy(() => import("./routes/Todo"));
 const Subscription = lazy(() => import("./routes/Subscription"));
+const LifeCalendar = lazy(() => import("./routes/LifeCalendar"));
 const InvalidRoute = lazy(() => import("./routes/InvalidRoute"));
 
 export interface AppProps {
@@ -42,21 +43,22 @@ const App: React.FC<AppProps> = (props: AppProps) => {
       {isAuthenticated ? (showToggle ? <SideBarMin /> : <SideBar />) : <NavigationBar />}
       <Switch>
         <div className={`content-area${isAuthenticated ? (open ? "-open" : "-min") : "-base"}`}>
-        <Suspense fallback={<div>Cacheing page</div>}>
-          <Route exact path="/" render={() => <LandingPage />} />
-          <Route path="/signup" render={() => <Signup />} />
-          <Route path="/login" render={() => <Login />} />
-          <Route path="/finance" render={() => <Finance />} />
-          <Route path="/bucket-list" render={() => <BucketList />} />
-          <Route path="/notes" render={() => <Notes />} />
-          <Route path="/schedule" render={() => <Schedule />} />
-          <Route path="/reminders" render={() =><Reminder />} />
-          <Route path="/todo" render={() => <Todo />} />
-          <Route path="/overview" render={() => <Overview />} />
-          <Route path="/profile" render={() => <Profile />} />
-          <Route path="/subscription" render={() => <Subscription />} />
-          <Route path="/invalid-route" render={() => <InvalidRoute />} />
-        </Suspense>
+          <Suspense fallback={<div>Cacheing page</div>}>
+            <Route exact path="/" render={() => <LandingPage />} />
+            <Route path="/signup" render={() => <Signup />} />
+            <Route path="/login" render={() => <Login />} />
+            <Route path="/finance" render={() => <Finance />} />
+            <Route path="/bucket-list" render={() => <BucketList />} />
+            <Route path="/notes" render={() => <Notes />} />
+            <Route path="/schedule" render={() => <Schedule />} />
+            <Route path="/reminders" render={() =><Reminder />} />
+            <Route path="/todo" render={() => <Todo />} />
+            <Route path="/overview" render={() => <Overview />} />
+            <Route path="/profile" render={() => <Profile />} />
+            <Route path="/subscription" render={() => <Subscription />} />
+            <Route path="/life-calendar" render={() => <LifeCalendar />} />
+            <Route path="/invalid-route" render={() => <InvalidRoute />} />
+          </Suspense>
         </div>
       </Switch>
     </div>
