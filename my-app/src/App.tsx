@@ -32,7 +32,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     else{
       setTimeout(() => {
         setShowToggle(true);
-      }, 250)
+      }, 100)
     }
   }, [open])
 
