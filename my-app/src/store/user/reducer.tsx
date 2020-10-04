@@ -3,7 +3,7 @@ import { UserState, UserActionTypes, SET_AUTHENTICATED } from './types';
 const initialState: UserState = {
     username: "",
     email: "",
-    isAuthenticated: true,
+    isAuthenticated: false,
 }
 
 export const userReducer = (state = initialState, action: UserActionTypes) => {

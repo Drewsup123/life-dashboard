@@ -38,10 +38,11 @@ const App: React.FC<AppProps> = (props: AppProps) => {
   }, [open])
 
   return (
-    <div className="Application">
+    <div className={`App${isAuthenticated&&"-authenticated"}`}>
+      {isAuthenticated ? (showToggle ? <SideBarMin /> : <SideBar />) : <NavigationBar />}
       <Switch>
+        <div className={`content-area${isAuthenticated ? (open ? "-open" : "-min") : "-base"}`}>
         <Suspense fallback={<div>Cacheing page</div>}>
-          {isAuthenticated ? (showToggle ? <SideBarMin /> : <SideBar />) : <NavigationBar />}
           <Route exact path="/" render={() => <LandingPage />} />
           <Route path="/signup" render={() => <Signup />} />
           <Route path="/login" render={() => <Login />} />
@@ -56,6 +57,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
           <Route path="/subscription" render={() => <Subscription />} />
           <Route path="/invalid-route" render={() => <InvalidRoute />} />
         </Suspense>
+        </div>
       </Switch>
     </div>
   );
