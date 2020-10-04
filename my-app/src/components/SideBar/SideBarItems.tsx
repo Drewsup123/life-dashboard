@@ -49,6 +49,11 @@ const routes: Array<RouteItem> = [
         linkTo: "/dream-journal",
         label: "Dream Journal",
         icon: "online_prediction"
+    },
+    {
+        linkTo: "life-calendar",
+        label: "Life Calendar",
+        icon: "date_range"
     }
 ];
 

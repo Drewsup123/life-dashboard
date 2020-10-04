@@ -5,6 +5,7 @@ import { InputText } from 'primereact/inputtext';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
 import { Redirect } from 'react-router';
+import { Button } from 'primereact/button';
 
 export interface IProps {
     isAuthenticated: boolean;
@@ -39,9 +40,9 @@ const Login: React.FC<IProps> = (props: IProps) => {
     if(isAuthenticated) return <Redirect to="/" />
 
     return (
-        <div>
-            <h1>Login Page</h1>
-            <form onSubmit={handleLogin}>
+        <div className="login-container">
+            <form className="login-form" onSubmit={handleLogin}>
+                <h2>Login</h2>
                 <span className="p-float-label">
                     <InputText autoComplete="email" id="email-input" name="email" onChange={handleChange} value={email} />
                     <label htmlFor="email-input">Email</label>
@@ -50,7 +51,7 @@ const Login: React.FC<IProps> = (props: IProps) => {
                     <Password autoComplete="current-password" id="password-input" name="password" onChange={handleChange} value={password} />
                     <label htmlFor="password-input">Password</label>
                 </span>
-                <button type="submit">submit</button>
+                <Button type="submit" label="Login" />
             </form>
         </div>
     );
