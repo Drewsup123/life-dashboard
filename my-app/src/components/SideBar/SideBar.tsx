@@ -24,10 +24,7 @@ const SideBar: React.FC<IProps> = (props: IProps) => {
     const { open } = props;
     PrimeReact.ripple = true;
 
-    const hideMenu = () => {
-        console.log("hiding");
-        props.toggleSideBar();
-    }
+    const hideMenu = () => { props.toggleSideBar() }
 
     return (
         <Sidebar className="sidebar" visible={open} position="left" onHide={hideMenu}>

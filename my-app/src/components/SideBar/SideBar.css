@@ -1,7 +1,17 @@
+.sidebar {
+    height: 100vh;
+}
+
+.p-sidebar-content {
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .sidebar-content {
     display: flex !important;
     flex-direction: column !important;
-    height: 90vh;
 }
 
 .sidebar-item {
@@ -43,4 +53,8 @@
 
 .ripple-danger .p-ink {
     background: rgba(255, 0, 0, 0.397);
+}
+
+.sidebar-footer {
+    margin-top: auto;
 }

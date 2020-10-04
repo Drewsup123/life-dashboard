@@ -7,18 +7,21 @@ export interface IProps {
     
 }
 
-const Signup: React.SFC<IProps> = () => {
+const Signup: React.FC<IProps> = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [confirmation, setConfirmation] = React.useState("");
     const [error, setError] = React.useState("");
 
-    const handleLogin = () => {
-        if(password === confirmation && email){
+    const handleLogin = (e: any) => {
+        e.preventDefault();
+        if((password == confirmation) && email){
             firebase.auth()
             .createUserWithEmailAndPassword(email, password)
             .then(response => {
                 console.log(response);
+                let isNewUser: boolean = response.additionalUserInfo?.isNewUser || false;
+                let email: string | null | undefined = response.user?.email;
             })
             .catch((error: any) => {
                 let { code, message } = error;
@@ -27,6 +30,7 @@ const Signup: React.SFC<IProps> = () => {
             });
         }else{
             // show warning
+            alert("no");
         }
     }
 
