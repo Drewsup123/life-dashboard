@@ -1,6 +1,6 @@
 import React from 'react';
-import firebase from 'firebase';
-import {Password} from 'primereact/password';
+import * as firebase from 'firebase';
+import { Password } from 'primereact/password';
 import { InputText } from 'primereact/inputtext';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
@@ -16,7 +16,8 @@ const Login: React.FC<IProps> = (props: IProps) => {
     const [password, setPassword] = React.useState("");
     const [error, setError] = React.useState("");
 
-    const handleLogin = () => {
+    const handleLogin = (e: any) => {
+        e.preventDefault();
         firebase.auth()
         .signInWithEmailAndPassword(email, password)
         .then(response => {
