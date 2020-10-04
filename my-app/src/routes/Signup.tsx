@@ -32,16 +32,9 @@ const Signup: React.SFC<IProps> = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
-        switch(e.target.name){
-            case "email":
-                setEmail(e.target.value);
-            case "password":
-                setPassword(e.target.value);
-            case "confirm-password":
-                setConfirmation(e.target.value);
-            default:
-                return;
-        }
+        if(e.target.name === "email") setEmail(e.target.value)
+        else if(e.target.name === "password") setPassword(e.target.value)
+        else setConfirmation(e.target.value)
     }
 
     return (
@@ -57,7 +50,7 @@ const Signup: React.SFC<IProps> = () => {
                     <label htmlFor="password-input">Password</label>
                 </span>
                 <span className="p-float-label">
-                    <Password autoComplete="current-password" id="password-confirm-input" name="confirm-password" onChange={handleChange} value={password} />
+                    <Password autoComplete="current-password" id="password-confirm-input" name="confirm-password" onChange={handleChange} value={confirmation} />
                     <label htmlFor="password-confirm-input">Confirm Password</label>
                 </span>
                 <button type="submit">submit</button>
