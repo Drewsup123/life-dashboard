@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AppState } from './store';
 import SideBar from './components/SideBar/SideBar';
@@ -47,16 +47,21 @@ const App: React.FC<AppProps> = (props: AppProps) => {
             <Route exact path="/" render={() => <LandingPage />} />
             <Route path="/signup" render={() => <Signup />} />
             <Route path="/login" render={() => <Login />} />
-            <Route path="/finance" render={() => <Finance />} />
-            <Route path="/bucket-list" render={() => <BucketList />} />
-            <Route path="/notes" render={() => <Notes />} />
-            <Route path="/schedule" render={() => <Schedule />} />
-            <Route path="/reminders" render={() =><Reminder />} />
-            <Route path="/todo" render={() => <Todo />} />
-            <Route path="/overview" render={() => <Overview />} />
-            <Route path="/profile" render={() => <Profile />} />
-            <Route path="/subscription" render={() => <Subscription />} />
-            <Route path="/life-calendar" render={() => <LifeCalendar />} />
+            {/* Authenticated Routes */}
+            {isAuthenticated&&(
+              <React.Fragment>
+                <Route path="/finance" render={() => <Finance />} />
+                <Route path="/bucket-list" render={() => <BucketList />} />
+                <Route path="/notes" render={() => <Notes />} />
+                <Route path="/schedule" render={() => <Schedule />} />
+                <Route path="/reminders" render={() =><Reminder />} />
+                <Route path="/todo" render={() => <Todo />} />
+                <Route path="/overview" render={() => <Overview />} />
+                <Route path="/profile" render={() => <Profile />} />
+                <Route path="/subscription" render={() => <Subscription />} />
+                <Route path="/life-calendar" render={() => <LifeCalendar />} />
+              </React.Fragment>
+            )}
             <Route path="/invalid-route" render={() => <InvalidRoute />} />
           </Suspense>
         </div>
