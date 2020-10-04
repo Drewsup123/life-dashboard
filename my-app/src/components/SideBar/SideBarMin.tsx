@@ -2,11 +2,11 @@ import React from 'react';
 import routes, {RouteItem} from './SideBarItems';
 import { toggleSideBar } from '../../store/application/actions';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import './SideBarMin.css';
 import { AppState } from '../../store';
 import { Ripple } from 'primereact/ripple';
 import SideBarItem from './SideBarItem';
+import ReactTooltip from 'react-tooltip';
 
 export interface IProps {
     toggleSideBar: any;
@@ -23,10 +23,10 @@ const SideBarMin: React.FC<IProps> = (props: IProps) => {
                 <i onClick={handleToggle} className="material-icons">menu_open</i>
             </div>
             {routes.map((route: RouteItem, index: number) => (
-                <SideBarItem key={index} icon={route.icon} linkTo={route.linkTo} label={route.label} min/>
+                <SideBarItem key={index} id={index} icon={route.icon} linkTo={route.linkTo} label={route.label} min/>
             ))}
             <div style={{marginTop: "auto"}}>
-                <SideBarItem icon="account_circle" linkTo="/profile" label="Profile" min />
+                <SideBarItem id="profile-link-min" icon="account_circle" linkTo="/profile" label="Profile" min />
                 <div className="sidebar-item p-ripple ripple-danger">
                     <i className="material-icons">logout</i>
                     <Ripple />

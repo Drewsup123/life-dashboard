@@ -32,10 +32,10 @@ const SideBar: React.FC<IProps> = (props: IProps) => {
     return (
         <Sidebar className="sidebar" visible={open} position="left" onHide={hideMenu}>
             <div className="sidebar-content">
-                {routes.map((route: RouteItem, index: number) => <SideBarItem key={index} label={route.label} linkTo={route.linkTo} icon={route.icon} />)}
+                {routes.map((route: RouteItem, index: number) => <SideBarItem key={index} id={index} label={route.label} linkTo={route.linkTo} icon={route.icon} />)}
             </div>
             <div className="sidebar-footer">
-                <SideBarItem label="Profile" icon="account_circle" linkTo="/profile" />
+                <SideBarItem id="profile-link-full" label="Profile" icon="account_circle" linkTo="/profile" />
                 <div className="sidebar-item p-ripple ripple-danger">
                     <i className="material-icons">logout</i>
                     <span>Logout</span>
