@@ -32,7 +32,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     else{
       setTimeout(() => {
         setShowToggle(true);
-      }, 500)
+      }, 250)
     }
   }, [open])
 
@@ -54,7 +54,6 @@ const App: React.FC<AppProps> = (props: AppProps) => {
           <Route path="/profile" render={() => <Profile />} />
           <Route path="/subscription" render={() => <Subscription />} />
           <Route path="/invalid-route" render={() => <InvalidRoute />} />
-          {/* <Route path="*" render={() => <Redirect to="/invalid-route" />} /> */}
         </Suspense>
       </Switch>
     </div>
