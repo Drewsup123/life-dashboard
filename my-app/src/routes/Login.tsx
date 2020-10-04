@@ -2,12 +2,16 @@ import React from 'react';
 import firebase from 'firebase';
 import {Password} from 'primereact/password';
 import { InputText } from 'primereact/inputtext';
+import { connect } from 'react-redux';
+import { AppState } from '../store';
+import { Redirect } from 'react-router';
 
 export interface IProps {
-    
+    isAuthenticated: boolean;
 }
 
-const Login: React.SFC<IProps> = () => {
+const Login: React.FC<IProps> = (props: IProps) => {
+    const { isAuthenticated } = props;
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [error, setError] = React.useState("");
@@ -31,6 +35,8 @@ const Login: React.SFC<IProps> = () => {
         else{ setPassword(e.target.value) }
     }
 
+    if(isAuthenticated) return <Redirect to="/" />
+
     return (
         <div>
             <h1>Login Page</h1>
@@ -49,4 +55,6 @@ const Login: React.SFC<IProps> = () => {
     );
 }
 
-export default Login;
+const mapStateToProps = (state: AppState) => ({ isAuthenticated: state.userReducer.isAuthenticated });
+
+export default connect(mapStateToProps)(Login);
