@@ -6,7 +6,8 @@ export interface IProps {
 
 const LandingPage: React.SFC<IProps> = () => {
     return (
-        <div>
+        <div style={{display: "flex", flexDirection: "column"}}>
+            <h1>Landing Page</h1>
             <h1>Landing Page</h1>
         </div>
     );

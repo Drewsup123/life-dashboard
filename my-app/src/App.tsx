@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { AppState } from './store';
 import SideBar from './components/SideBar/SideBar';
 import SideBarMin from './components/SideBar/SideBarMin';
+import NavigationBar from './components/NavigationBar/NavigationBar';
 const Profile = lazy(() => import("./routes/Profile"));
 const BucketList = lazy(() => import("./routes/BucketList"));
 const Finance = lazy(() => import("./routes/Finance"));
 const LandingPage = lazy(() => import("./routes/LandingPage"));
-const Login = lazy(() => import("./routes/Signup"));
+const Login = lazy(() => import("./routes/Login"));
 const Signup = lazy(() => import("./routes/Signup"));
 const Notes = lazy(() => import("./routes/Notes"));
 const Overview = lazy(() => import("./routes/Overview"));
@@ -39,8 +40,8 @@ const App: React.FC<AppProps> = (props: AppProps) => {
   return (
     <div className="Application">
       <Switch>
-        {showToggle ? <SideBarMin /> : <SideBar />}
         <Suspense fallback={<div>Cacheing page</div>}>
+          {isAuthenticated ? (showToggle ? <SideBarMin /> : <SideBar />) : <NavigationBar />}
           <Route exact path="/" render={() => <LandingPage />} />
           <Route path="/signup" render={() => <Signup />} />
           <Route path="/login" render={() => <Login />} />

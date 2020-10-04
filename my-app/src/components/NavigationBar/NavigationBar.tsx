@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menubar } from 'primereact/menubar';
+import { NavLink } from 'react-router-dom';
+import './NavigationBar.css'
 
 export interface NavigationBarProps {
     
@@ -136,11 +137,13 @@ const items:any = [
 
 const NavigationBar: React.FC<NavigationBarProps> = () => {
     return (
-        <Menubar
-            model={items}
-            // start={<InputText placeholder="Search" type="text"/>}
-            // end={<Button label="Logout" icon="pi pi-power-off"/>}
-        />
+        <div className="navigation-bar">
+            <NavLink exact to="/">Home</NavLink>
+            <NavLink to="/about-us">About Us</NavLink>
+            <NavLink to="/pricing">Pricing</NavLink>
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/signup">Signup</NavLink>
+        </div>
     );
 }
 
