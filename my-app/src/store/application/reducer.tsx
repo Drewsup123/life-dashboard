@@ -7,7 +7,7 @@ const initialState: ApplicationState = {
 export const applicationReducer = (state = initialState, action: ApplicationTypes) => {
     switch(action.type){
         case TOGGLE_SIDEBAR:
-            return { ...state, sideBarOpen: action.payload };
+            return { ...state, sideBarOpen: !state.sideBarOpen };
         default:
             return state;
     }

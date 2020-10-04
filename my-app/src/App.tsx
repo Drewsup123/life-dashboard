@@ -2,8 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AppState } from './store';
-import NavigationBar from './components/NavigationBar/NavigationBar';
 import SideBar from './components/SideBar/SideBar';
+import SideBarMin from './components/SideBar/SideBarMin';
 const Profile = lazy(() => import("./routes/Profile"));
 const BucketList = lazy(() => import("./routes/BucketList"));
 const Finance = lazy(() => import("./routes/Finance"));
@@ -19,14 +19,27 @@ const Subscription = lazy(() => import("./routes/Subscription"));
 const InvalidRoute = lazy(() => import("./routes/InvalidRoute"));
 
 export interface AppProps {
-  
+  open: boolean;
+  isAuthenticated: boolean;
 }
 
-const App: React.FC<AppProps> = () => {
+const App: React.FC<AppProps> = (props: AppProps) => {
+  const { open, isAuthenticated } = props;
+  const [showToggle, setShowToggle] = React.useState(true);
+
+  React.useEffect(() => {
+    if(open){setShowToggle(false)}
+    else{
+      setTimeout(() => {
+        setShowToggle(true);
+      }, 500)
+    }
+  }, [open])
+
   return (
     <div className="Application">
       <Switch>
-        <SideBar />
+        {showToggle ? <SideBarMin /> : <SideBar />}
         <Suspense fallback={<div>Cacheing page</div>}>
           <Route exact path="/" render={() => <LandingPage />} />
           <Route path="/signup" render={() => <Signup />} />
@@ -48,10 +61,9 @@ const App: React.FC<AppProps> = () => {
   );
 }
 
-// const mapStateToProps = (state: AppState) => ({
-//   isAuthenticated: state.
-// })
+const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: state.userReducer.isAuthenticated,
+  open: state.applicationReducer.sideBarOpen
+})
 
-// export default connect(mapStateToProps, {})(App);
-
-export default App;
+export default connect(mapStateToProps, {})(App);
