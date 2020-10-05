@@ -7,13 +7,15 @@ export interface IProps {
 //? width 52 weeks height 89 -> 0-90 years old
 
 const LifeCalendar: React.FC<IProps> = (props: IProps) => {
+    const [addEventOpen, setAddEventOpen] = React.useState(false);
+    const [addGoalOpen, setAddGoalOpen]  = React.useState(false);
+    //#region Life Calendar Setup
     let rows: any = [];
     let singleRow = [];
     let header = [];
     for(let i = 0; i <= 52; i++){
-        header.push(<div className="life-calendar-header life-calendar-cell">
+        header.push(<div className="life-calendar-header-cell">
             <span>{i}</span>
-            <div className={`life-calendar-cell life-week-header-${i}`} key={i}></div>
         </div>)
     }
     for(let i = 0; i <= 52; i++){
@@ -22,6 +24,7 @@ const LifeCalendar: React.FC<IProps> = (props: IProps) => {
     for(let i = 0; i <= 90; i++){
         rows.push(singleRow);
     }
+    //#endregion
     return (
         <div>
             <h1>Life calendar</h1>

@@ -72,11 +72,26 @@ code {
 
 .life-calendar-cell {
   height: 25px;
-  width: 2%;
+  width: 1.9%;
   border: 1px solid black;
+}
+
+.life-calendar-cell:hover {
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0.486);
+  transition: 0.2s;
 }
 
 .life-calendar-header {
   display: flex;
   flex-direction: column;
+}
+
+.life-calendar-header-cell {
+  height: 25px;
+  width: 1.9%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 4px solid black;
 }
