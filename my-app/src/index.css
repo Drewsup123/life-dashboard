@@ -25,6 +25,8 @@ code {
 .content-area-open {
   margin-left: 20rem;
   max-height: 100vh;
+  width: calc(100vw - 20rem);
+  overflow-y: scroll;
 }
 
 .content-area-min {
