@@ -4,9 +4,10 @@ export interface IProps {
     dateOfBirth?: any;
 }
 
-//? width 52 weeks height 89 -> 0-90 years old
+//? width 52 weeks in a year, height 90 or 90 years -> 0-90 years old
 
 const LifeCalendar: React.FC<IProps> = (props: IProps) => {
+    let birthDate = "02/06/2000";
     const [addEventOpen, setAddEventOpen] = React.useState(false);
     const [addGoalOpen, setAddGoalOpen]  = React.useState(false);
     //#region Life Calendar Setup
