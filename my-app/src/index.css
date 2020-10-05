@@ -23,9 +23,9 @@ code {
 }
 
 .content-area-open {
-  margin-left: 20rem;
+  margin-left: calc(20rem + 10px);
   max-height: 100vh;
-  width: calc(100vw - 20rem);
+  width: calc(100vw - 20rem + 10px);
   overflow-y: scroll;
 }
 
