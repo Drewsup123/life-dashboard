@@ -13,13 +13,13 @@ const LifeCalendar: React.FC<IProps> = (props: IProps) => {
     for(let i = 0; i <= 52; i++){
         header.push(<div className="life-calendar-header life-calendar-cell">
             <span>{i}</span>
-            <div className={`life-calendar-cell life-week-${i}`} key={i}></div>
+            <div className={`life-calendar-cell life-week-header-${i}`} key={i}></div>
         </div>)
     }
     for(let i = 0; i <= 52; i++){
         singleRow.push(<div className={`life-calendar-cell life-week-${i}`} key={i}></div>)
     }
-    for(let i = 0; i < 90; i++){
+    for(let i = 0; i <= 90; i++){
         rows.push(singleRow);
     }
     return (
