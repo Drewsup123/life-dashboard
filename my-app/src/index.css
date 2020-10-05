@@ -30,6 +30,8 @@ code {
 .content-area-min {
   margin-left: 10px;
   max-height: 100vh;
+  width: calc(100vw - 70px);
+  overflow-y: scroll;
 }
 
 .login-container {
@@ -51,4 +53,30 @@ code {
 
 .login-container .login-form span{
   margin-bottom: 20px;
+}
+
+/* ============================================
+    Life Calendar Styling
+==============================================*/
+.life-calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.life-calendar-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.life-calendar-cell {
+  height: 25px;
+  width: 2%;
+  border: 1px solid black;
+}
+
+.life-calendar-header {
+  display: flex;
+  flex-direction: column;
 }

@@ -6,7 +6,7 @@ const initialState: UserState = {
     email: "",
     UID: "",
     emailVerified: false,
-    isAuthenticated: false,
+    isAuthenticated: true,
 }
 
 export const userReducer = (state = initialState, action: UserActionTypes) => {
