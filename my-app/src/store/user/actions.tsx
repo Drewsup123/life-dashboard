@@ -15,3 +15,4 @@ export const logout = () => (dispatch: any) => {
 export const login = (loginObject: any) => (dispatch: any) => {
     dispatch({ type: LOGIN_SUCCESSFUL, payload: loginObject })
 }
+

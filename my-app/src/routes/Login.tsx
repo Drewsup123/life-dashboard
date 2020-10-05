@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 import { AppState } from '../store';
 import { Redirect } from 'react-router';
 import { Button } from 'primereact/button';
+import { login } from '../store/user/actions';
 
 export interface IProps {
     isAuthenticated: boolean;
+    login: any;
 }
 
 const Login: React.FC<IProps> = (props: IProps) => {
@@ -19,10 +21,19 @@ const Login: React.FC<IProps> = (props: IProps) => {
 
     const handleLogin = (e: any) => {
         e.preventDefault();
+        console.log("Handle login");
         firebase.auth()
         .signInWithEmailAndPassword(email, password)
         .then(response => {
+            //? Needs email, created, isFirstSignin, and UID
             console.log(response);
+            let isNewUser = response.additionalUserInfo?.isNewUser;
+            let email = response.user?.email;
+            let emailVerified = response.user?.emailVerified;
+            let UID = response.user?.uid;
+            if(email && UID){
+                props.login({ UID, email, emailVerified: emailVerified, isNewUser });
+            }
         })
         .catch((error: any) => {
             let { code, message } = error;
@@ -59,4 +70,4 @@ const Login: React.FC<IProps> = (props: IProps) => {
 
 const mapStateToProps = (state: AppState) => ({ isAuthenticated: state.userReducer.isAuthenticated });
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps, { login })(Login);

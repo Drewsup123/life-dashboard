@@ -2,6 +2,8 @@ export interface UserState {
     username: string;
     email: string;
     isAuthenticated: boolean;
+    emailVerified: boolean;
+    UID: string;
 }
 
 export const SET_AUTHENTICATED = "SET_AUTHENTICATED";
@@ -17,7 +19,9 @@ interface loginSuccess {
     type: typeof LOGIN_SUCCESSFUL;
     payload: {
         email: string;
-        id: string;
+        emailVerified: boolean;
+        isNewUser: boolean;
+        UID: string;
     };
 }
 

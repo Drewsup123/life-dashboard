@@ -4,6 +4,8 @@ import * as firebase from 'firebase';
 const initialState: UserState = {
     username: "",
     email: "",
+    UID: "",
+    emailVerified: false,
     isAuthenticated: false,
 }
 
@@ -12,7 +14,13 @@ export const userReducer = (state = initialState, action: UserActionTypes) => {
         case SET_AUTHENTICATED:
             return state;
         case LOGIN_SUCCESSFUL:
-            return state;
+            return { 
+                ...state, 
+                isAuthenticated: true, 
+                email: action.payload.email,
+                emailVerified: action.payload.emailVerified,
+                UID: action.payload.UID
+            };
         case LOGOUT:
             return initialState;
         default:
