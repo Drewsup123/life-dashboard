@@ -1,4 +1,5 @@
 import React from 'react';
+import dayjs from 'dayjs';
 
 export interface IProps {
     dateOfBirth?: any;
@@ -20,7 +21,13 @@ const LifeCalendar: React.FC<IProps> = (props: IProps) => {
         </div>)
     }
     for(let i = 0; i <= 52; i++){
-        singleRow.push(<div className={`life-calendar-cell life-week-${i}`} key={i}></div>)
+        singleRow.push(
+        <div 
+        data-start={dayjs(birthDate).add(i, "week")}
+        data-end={dayjs(birthDate).add((i * 7) - 1, "day")}
+        className={`life-calendar-cell life-week-${i}`} 
+        key={i}
+        ></div>)
     }
     for(let i = 0; i <= 90; i++){
         rows.push(singleRow);
