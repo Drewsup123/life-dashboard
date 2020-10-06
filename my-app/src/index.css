@@ -30,7 +30,7 @@ code {
 }
 
 .content-area-min {
-  margin-left: 10px;
+  margin-left: 0px;
   max-height: 100vh;
   width: calc(100vw - 70px);
   overflow-y: scroll;
@@ -96,4 +96,11 @@ code {
   justify-content: center;
   align-items: center;
   border-bottom: 4px solid black;
+}
+
+/* ========================
+Journal CSS
+===========================*/
+.Cal__Day__highlighted:before {
+  background-color: #a4c6ff!important;
 }

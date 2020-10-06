@@ -1,6 +1,6 @@
 import React from 'react';
 import * as firebase from 'firebase';
-import { Password } from 'primereact/password';
+// import { Password } from 'primereact/password';
 import { InputText } from 'primereact/inputtext';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
@@ -59,7 +59,7 @@ const Login: React.FC<IProps> = (props: IProps) => {
                     <label htmlFor="email-input">Email</label>
                 </span>
                 <span className="p-float-label">
-                    <Password autoComplete="current-password" id="password-input" name="password" onChange={handleChange} value={password} />
+                    {/* <Password autoComplete="current-password" id="password-input" name="password" onChange={handleChange} value={password} /> */}
                     <label htmlFor="password-input">Password</label>
                 </span>
                 <Button type="submit" label="Login" />

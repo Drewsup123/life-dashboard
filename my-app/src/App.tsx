@@ -18,6 +18,7 @@ const Schedule = lazy(() => import("./routes/Schedule"));
 const Todo = lazy(() => import("./routes/Todo"));
 const Subscription = lazy(() => import("./routes/Subscription"));
 const LifeCalendar = lazy(() => import("./routes/LifeCalendar"));
+const Journal = lazy(() => import("./routes/Journal"));
 const InvalidRoute = lazy(() => import("./routes/InvalidRoute"));
 
 export interface AppProps {
@@ -60,6 +61,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
                 <Route path="/profile" render={() => <Profile />} />
                 <Route path="/subscription" render={() => <Subscription />} />
                 <Route path="/life-calendar" render={() => <LifeCalendar />} />
+                <Route path="/journal" render={() => <Journal />} />
               </React.Fragment>
             )}
             <Route path="/invalid-route" render={() => <InvalidRoute />} />

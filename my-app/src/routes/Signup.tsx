@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 import { InputText } from 'primereact/inputtext';
-import { Password } from 'primereact/password';
+// import { Password } from 'primereact/password';
 
 export interface IProps {
     
@@ -50,11 +50,11 @@ const Signup: React.FC<IProps> = () => {
                     <label htmlFor="email-input">Email</label>
                 </span>
                 <span className="p-float-label">
-                    <Password autoComplete="current-password" id="password-input" name="password" onChange={handleChange} value={password} />
+                    {/* <Password autoComplete="current-password" id="password-input" name="password" onChange={handleChange} value={password} /> */}
                     <label htmlFor="password-input">Password</label>
                 </span>
                 <span className="p-float-label">
-                    <Password autoComplete="current-password" id="password-confirm-input" name="confirm-password" onChange={handleChange} value={confirmation} />
+                    {/* <Password autoComplete="current-password" id="password-confirm-input" name="confirm-password" onChange={handleChange} value={confirmation} /> */}
                     <label htmlFor="password-confirm-input">Confirm Password</label>
                 </span>
                 <button type="submit">submit</button>

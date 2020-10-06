@@ -54,6 +54,11 @@ const routes: Array<RouteItem> = [
         linkTo: "life-calendar",
         label: "Life Calendar",
         icon: "date_range"
+    },
+    {
+        linkTo: "journal",
+        label: "Journal/Mood Tracker",
+        icon: "mood"
     }
 ];
 
