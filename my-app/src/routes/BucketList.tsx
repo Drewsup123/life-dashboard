@@ -21,19 +21,22 @@ type BucketListItem = {
 const BucketList: React.SFC<IProps> = (props: IProps) => {
     const { UID } = props;
     const [items, setItems] = React.useState([] as any);
-    const [newItem, setNewItem] = React.useState({ name: "", description: "", notes: "" });
+    const [newItem, setNewItem] = React.useState({ name: "", description: "", notes: "" } as any);
 
     const addItem = (e: React.SyntheticEvent) => {
         e.preventDefault();
         let key:any = database.ref("/bucket-list/" + UID).push();
-        key.set({
+        let final: BucketListItem = {
             ...newItem,
             key: key.key,
             created: Date.now(),
             completed: false,
-            expectedCompletion: "",
-        }).then((res: any) => {
+            expectedCompletion: ""
+        };
+        key.set(final).then((res: any) => {
             console.log(res);
+            let finalItems: Array<BucketListItem> = [...items, final];
+            setItems(finalItems);
             clearNewItem();
         })
         .catch((err: any) => {
@@ -41,7 +44,7 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
         })
     }
 
-    const clearNewItem = () => { setNewItem({ name: "", description: "", notes: "" }) }
+    const clearNewItem = () => { setNewItem({ name: "", description: "", notes: "" }); }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -64,7 +67,7 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
         <div>
             <h1>Bucket List</h1>
             {Object.keys(newItem).map((key: string) => (
-                <input key={key} type="text" name={key} onChange={handleChange} placeholder={key} />
+                <input key={key} type="text" name={key} value={newItem[key]} onChange={handleChange} placeholder={key} />
             ))}
             <button onClick={addItem}>Add Item</button>
             <div style={{ display: "flex", flexDirection: "column" }}>
