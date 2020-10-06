@@ -50,7 +50,7 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    UID: state.userReducer.UID
+    UID: state.User.UID
 });
 
 export default connect(mapStateToProps)(BucketList);

@@ -3,8 +3,8 @@ import { userReducer } from './user/reducer';
 import { applicationReducer } from './application/reducer';
 
 const rootReducer = combineReducers({
-    userReducer,
-    applicationReducer
+    User: userReducer,
+    Application: applicationReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

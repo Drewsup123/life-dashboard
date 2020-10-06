@@ -68,6 +68,6 @@ const Login: React.FC<IProps> = (props: IProps) => {
     );
 }
 
-const mapStateToProps = (state: AppState) => ({ isAuthenticated: state.userReducer.isAuthenticated });
+const mapStateToProps = (state: AppState) => ({ isAuthenticated: state.User.isAuthenticated });
 
 export default connect(mapStateToProps, { login })(Login);

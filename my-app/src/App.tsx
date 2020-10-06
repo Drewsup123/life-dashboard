@@ -78,8 +78,8 @@ const App: React.FC<AppProps> = (props: AppProps) => {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  isAuthenticated: state.userReducer.isAuthenticated,
-  open: state.applicationReducer.sideBarOpen
+  isAuthenticated: state.User.isAuthenticated,
+  open: state.Application.sideBarOpen
 })
 
 export default connect(mapStateToProps, {})(App);

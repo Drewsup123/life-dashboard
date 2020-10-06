@@ -44,7 +44,7 @@ const SideBar: React.FC<IProps> = (props: IProps) => {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    open: state.applicationReducer.sideBarOpen,
+    open: state.Application.sideBarOpen,
 })
 
 export default connect(mapStateToProps, { toggleSideBar })(SideBar);
