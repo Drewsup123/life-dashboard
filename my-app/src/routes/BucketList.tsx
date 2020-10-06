@@ -31,7 +31,10 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
             key: key.key,
             created: Date.now(),
             completed: false,
-            expectedCompletion: ""
+            expectedCompletion: "",
+            // Possible fields to add
+            // progress: "",
+            // steps: [],
         };
         key.set(final).then((res: any) => {
             console.log(res);
