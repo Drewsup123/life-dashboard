@@ -11,12 +11,14 @@ export interface IProps {
 
 const JournalEntry: React.FC<IProps> = (props: IProps) => {
     const { open, onHide, selected } = props;
+    const [header, setHeader] = React.useState(selected ? selected.toISOString().split("T")[0] : null);
     React.useEffect(() => {
         // ? Get the users entry if there is none allow them to type in the box
+        console.log("Selected", selected);
     }, [])
     return (
         <Dialog 
-            header={dayjs(selected).format("MM-DD-YYYY")}
+            header={header}
             visible={open} 
             maximizable 
             modal 
