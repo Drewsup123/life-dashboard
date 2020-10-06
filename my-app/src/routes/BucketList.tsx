@@ -3,27 +3,48 @@ import firebase from 'firebase';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
 const database = firebase.database();
+
 export interface IProps {
     UID: string;
 }
 
+type BucketListItem = {
+    name: string;
+    description: string;
+    notes: string;
+    created: string | number;
+    completed: boolean;
+    expectedCompletion: string | number;
+}
+
 const BucketList: React.SFC<IProps> = (props: IProps) => {
     const { UID } = props;
+    const [items, setItems] = React.useState([] as any);
+    const [newItem, setNewItem] = React.useState({ name: "", description: "", notes: "" });
 
     const addItem = (e: React.SyntheticEvent) => {
         e.preventDefault();
         let key:any = database.ref("/bucket-list/" + UID).push();
         key.set({
-            name: "Go Sky Diving",
+            ...newItem,
+            key: key.key,
             created: Date.now(),
             completed: false,
             expectedCompletion: "",
         }).then((res: any) => {
             console.log(res);
+            clearNewItem();
         })
         .catch((err: any) => {
             console.log(err);
         })
+    }
+
+    const clearNewItem = () => { setNewItem({ name: "", description: "", notes: "" }) }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        setNewItem({ ...newItem, [e.target.name]: e.target.value });
     }
 
     React.useEffect(() => {
@@ -31,20 +52,27 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
         .then(res => {
             const snapshot = res.val();
             console.log("SnapShot", snapshot);
+            setItems(Object.values(snapshot));
         })
         .catch(err => {
             console.log(err);
         })
     }, [])
+
     return (
         <div>
             <h1>Bucket List</h1>
-            <input type="text" placeholder="Add An Item" />
+            {Object.keys(newItem).map((key: string) => (
+                <input type="text" name={key} onChange={handleChange} placeholder={key} />
+            ))}
             <button onClick={addItem}>Add Item</button>
             {/* // ? Render input at the top to add bucket list item
             // ? Render list below with bucket list items
             // ? Mark as completed show added date, expected completion time, editing, good list animation 
             */}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+                {items.map((item: BucketListItem) => <div>{item.name}</div>)}
+            </div>
         </div>
     );
 }
