@@ -5,6 +5,7 @@ import { AppState } from './store';
 import SideBar from './components/SideBar/SideBar';
 import SideBarMin from './components/SideBar/SideBarMin';
 import NavigationBar from './components/NavigationBar/NavigationBar';
+import { AnimatePresence } from "framer-motion";
 const Profile = lazy(() => import("./routes/Profile"));
 const BucketList = lazy(() => import("./routes/BucketList"));
 const Finance = lazy(() => import("./routes/Finance"));
@@ -42,32 +43,36 @@ const App: React.FC<AppProps> = (props: AppProps) => {
   return (
     <div className={`App${isAuthenticated&&"-authenticated"}`}>
       {isAuthenticated ? (showToggle ? <SideBarMin /> : <SideBar />) : <NavigationBar />}
-      <Switch>
-        <div className={`content-area${isAuthenticated ? (open ? "-open" : "-min") : "-base"}`}>
-          <Suspense fallback={<div>Cacheing page</div>}>
-            <Route exact path="/" render={() => <LandingPage />} />
-            <Route path="/signup" render={() => <Signup />} />
-            <Route path="/login" render={() => <Login />} />
-            {/* Authenticated Routes */}
-            {isAuthenticated&&(
-              <React.Fragment>
-                <Route path="/finance" render={() => <Finance />} />
-                <Route path="/bucket-list" render={() => <BucketList />} />
-                <Route path="/notes" render={() => <Notes />} />
-                <Route path="/schedule" render={() => <Schedule />} />
-                <Route path="/reminders" render={() =><Reminder />} />
-                <Route path="/todo" render={() => <Todo />} />
-                <Route path="/overview" render={() => <Overview />} />
-                <Route path="/profile" render={() => <Profile />} />
-                <Route path="/subscription" render={() => <Subscription />} />
-                <Route path="/life-calendar" render={() => <LifeCalendar />} />
-                <Route path="/journal" render={() => <Journal />} />
-              </React.Fragment>
-            )}
-            <Route path="/invalid-route" render={() => <InvalidRoute />} />
-          </Suspense>
-        </div>
-      </Switch>
+      <AnimatePresence exitBeforeEnter initial={false}>
+        <Switch>
+          <Route render={({location}) => (
+            <div className={`content-area${isAuthenticated ? (open ? "-open" : "-min") : "-base"}`}>
+              <Suspense fallback={<div>Cacheing page</div>}>
+                <Route exact path="/" render={() => <LandingPage />} />
+                <Route path="/signup" render={() => <Signup />} />
+                <Route path="/login" render={() => <Login />} />
+                {/* Authenticated Routes */}
+                {isAuthenticated&&(
+                  <React.Fragment>
+                    <Route path="/finance" render={() => <Finance />} />
+                    <Route path="/bucket-list" render={() => <BucketList />} />
+                    <Route path="/notes" render={() => <Notes />} />
+                    <Route path="/schedule" render={() => <Schedule />} />
+                    <Route path="/reminders" render={() =><Reminder />} />
+                    <Route path="/todo" render={() => <Todo />} />
+                    <Route path="/overview" render={() => <Overview />} />
+                    <Route path="/profile" render={() => <Profile />} />
+                    <Route path="/subscription" render={() => <Subscription />} />
+                    <Route path="/life-calendar" render={() => <LifeCalendar />} />
+                    <Route path="/journal" render={() => <Journal />} />
+                  </React.Fragment>
+                )}
+                <Route path="/invalid-route" render={() => <InvalidRoute />} />
+              </Suspense>
+            </div>
+          )}/>
+        </Switch>
+      </AnimatePresence>
     </div>
   );
 }

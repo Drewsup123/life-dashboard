@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 const initialState: UserState = {
     username: "",
     email: "",
-    UID: "",
+    UID: "DEV",
     emailVerified: false,
     isAuthenticated: true,
 }
