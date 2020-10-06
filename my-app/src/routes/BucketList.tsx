@@ -15,6 +15,7 @@ type BucketListItem = {
     created: string | number;
     completed: boolean;
     expectedCompletion: string | number;
+    key: string;
 }
 
 const BucketList: React.SFC<IProps> = (props: IProps) => {
@@ -63,15 +64,11 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
         <div>
             <h1>Bucket List</h1>
             {Object.keys(newItem).map((key: string) => (
-                <input type="text" name={key} onChange={handleChange} placeholder={key} />
+                <input key={key} type="text" name={key} onChange={handleChange} placeholder={key} />
             ))}
             <button onClick={addItem}>Add Item</button>
-            {/* // ? Render input at the top to add bucket list item
-            // ? Render list below with bucket list items
-            // ? Mark as completed show added date, expected completion time, editing, good list animation 
-            */}
             <div style={{ display: "flex", flexDirection: "column" }}>
-                {items.map((item: BucketListItem) => <div>{item.name}</div>)}
+                {items.map((item: BucketListItem, index: number) => <div key={item.key}>{item.name}</div>)}
             </div>
         </div>
     );
