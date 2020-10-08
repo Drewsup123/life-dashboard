@@ -7,6 +7,7 @@ import { Button } from 'primereact/button';
 import BucketListItem from '../components/BucketList/BucketListItem';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import AddItemDialog from '../components/BucketList/AddItemDialog';
 const database = firebase.database();
 
 export interface IProps {
@@ -25,9 +26,11 @@ export type BucketListItemType = {
 
 const BucketList: React.FC<IProps> = (props: IProps) => {
     const { UID } = props;
+    const tableRef: any = React.useRef(null);
     const [items, setItems] = React.useState([] as any);
     const [newItem, setNewItem] = React.useState({ name: "", description: "", notes: "" } as any);
     const [globalFilter, setGlobalFilter] = React.useState(null as any);
+    const [addOpen, setAddOpen] = React.useState(false);
 
     const addItem = (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -81,20 +84,28 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
 
     return (
         <div style={{ padding: "0 20px" }}>
-            <h1 className="w-100 text-center">Bucket List</h1>
             <DataTable 
                 value={items}
                 globalFilter={globalFilter} 
                 emptyMessage="No items found."
                 rows={Math.floor(window.innerHeight / 50)}
+                ref={tableRef}
                 header={
-                <div className="d-flex justify-content-end align-items-center">
+                <div className="d-flex justify-content-between align-items-center">
+                    <h2>Bucket List</h2>
                     <span className="p-input-icon-left">
                         <i className="pi pi-search" />
                         <InputText type="search" placeholder="Search" onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
                             e.preventDefault();
                             setGlobalFilter(e.target.value);
                         }}/>
+                        <Button onClick={(e: React.SyntheticEvent) => {
+                            e.preventDefault();
+                            setAddOpen(true);
+                        }}>
+                            <i className="material-icons">add</i>
+                            <span>Add Item</span>
+                        </Button>
                     </span>
                 </div>
                 }
@@ -104,6 +115,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
                 <Column field="description" header="Description"></Column>
                 <Column field="notes" header="Notes"></Column>
             </DataTable>
+            <AddItemDialog open={addOpen} onHide={() => setAddOpen(false)} />
         </div>
     );
 }
