@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import BucketListItem from '../components/BucketList/BucketListItem';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 const database = firebase.database();
 
 export interface IProps {
@@ -37,7 +39,8 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
             expectedCompletion: "",
             // Possible fields to add
             // progress: "",
-            // steps: []
+            // steps: [],
+            // images: [],
         };
         key.set(final).then((res: any) => {
             console.log(res);
@@ -57,6 +60,12 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
         setNewItem({ ...newItem, [e.target.name]: e.target.value });
     }
 
+    const formatCompletedCol = (rowData: BucketListItemType) => (
+        <span>
+            <i className={`material-icons ${rowData.completed ? "text-success" : "text-danger"}`}>{rowData.completed ? "check_circle" : "cancel"}</i>
+        </span>
+    )  
+
     React.useEffect(() => {
         database.ref("/bucket-list/" + UID).once("value")
         .then(res => {
@@ -70,27 +79,14 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
     }, [])
 
     return (
-        <div>
-            <h1>Bucket List</h1>
-            <div className="col-12 col-md-12">
-            {Object.keys(newItem).map((key: string) => (
-                <InputText className="col-12 col-md-3" key={key} type="text" name={key} value={newItem[key]} onChange={handleChange} placeholder={key} />
-            ))}
-            <Button className="col-3" label="Add Item" onClick={addItem} />
-            </div>
-            {/* <button onClick={addItem}>Add Item</button> */}
-            <div className="bucket-list-container">
-                <div className="bucket-list-list-header">
-                    <span>Name</span>
-                    <span>Description</span>
-                    <span>Created On</span>
-                    <span>Completed</span>
-                    <span>Notes</span>
-                </div>
-                {items.map((item: BucketListItemType, index: number) => (
-                    <BucketListItem {...item} />
-                ))}
-            </div>
+        <div style={{ padding: "0 20px" }}>
+            <h1 className="w-100 text-center">Bucket List</h1>
+            <DataTable value={items}>
+                <Column field="completed" header="" body={formatCompletedCol}></Column>
+                <Column field="name" header="Name" sortable></Column>
+                <Column field="description" header="Description"></Column>
+                <Column field="notes" header="Notes"></Column>
+            </DataTable>
         </div>
     );
 }

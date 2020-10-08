@@ -6,13 +6,14 @@ export interface IProps extends BucketListItemType {
 }
 
 const BucketListItem: React.FC<IProps> = (props: IProps) => {
-    const { name, description, notes, created, completed, expectedCompletion } = props;
+    const { name, description, notes, completed, expectedCompletion } = props;
     return (
         <div className="bucket-list-item">
+            <span>
+                <i className={`material-icons ${completed ? "text-success" : "text-danger"}`}>{completed ? "check_circle" : "cancel"}</i>
+            </span>
             <span>{name}</span>
             <span>{description}</span>
-            <span>{created}</span>
-            <span>{completed}</span>
             <span>{notes}</span>
         </div>
     );
