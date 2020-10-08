@@ -9,6 +9,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import AddItemDialog from '../components/BucketList/AddItemDialog';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { ProgressBar } from 'primereact/progressbar';
 import EditItemDialog from '../components/BucketList/EditItemDialog';
 const database = firebase.database();
 
@@ -107,6 +108,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="description" header="Description"></Column>
                     <Column field="notes" header="Notes"></Column>
+                    <Column field="progress" header="Progress" body={(rowData: any) => <ProgressBar value={rowData.progress || 0} />}></Column>
                     <Column field="actions" header="" body={renderActions}></Column>
                 </DataTable>
             }
