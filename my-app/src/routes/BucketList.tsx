@@ -27,6 +27,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
     const { UID } = props;
     const [items, setItems] = React.useState([] as any);
     const [newItem, setNewItem] = React.useState({ name: "", description: "", notes: "" } as any);
+    const [globalFilter, setGlobalFilter] = React.useState(null as any);
 
     const addItem = (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -64,7 +65,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
         <span>
             <i className={`material-icons ${rowData.completed ? "text-success" : "text-danger"}`}>{rowData.completed ? "check_circle" : "cancel"}</i>
         </span>
-    )  
+    );
 
     React.useEffect(() => {
         database.ref("/bucket-list/" + UID).once("value")
@@ -81,7 +82,23 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
     return (
         <div style={{ padding: "0 20px" }}>
             <h1 className="w-100 text-center">Bucket List</h1>
-            <DataTable value={items}>
+            <DataTable 
+                value={items}
+                globalFilter={globalFilter} 
+                emptyMessage="No items found."
+                rows={Math.floor(window.innerHeight / 50)}
+                header={
+                <div className="d-flex justify-content-end align-items-center">
+                    <span className="p-input-icon-left">
+                        <i className="pi pi-search" />
+                        <InputText type="search" placeholder="Search" onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            e.preventDefault();
+                            setGlobalFilter(e.target.value);
+                        }}/>
+                    </span>
+                </div>
+                }
+            >
                 <Column field="completed" header="" body={formatCompletedCol}></Column>
                 <Column field="name" header="Name" sortable></Column>
                 <Column field="description" header="Description"></Column>

@@ -115,6 +115,11 @@ Bucket List CSS
   padding: 0px 20px;
 }
 
+.datatable-filter-demo .table-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .bucket-list-container .bucket-list-list-header {
   display: flex;
   width: 100%;
