@@ -28,41 +28,10 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
     const { UID } = props;
     const tableRef: any = React.useRef(null);
     const [items, setItems] = React.useState([] as any);
-    const [newItem, setNewItem] = React.useState({ name: "", description: "", notes: "" } as any);
     const [globalFilter, setGlobalFilter] = React.useState(null as any);
     const [addOpen, setAddOpen] = React.useState(false);
 
-    const addItem = (e: React.SyntheticEvent) => {
-        e.preventDefault();
-        let key:any = database.ref("/bucket-list/" + UID).push();
-        let final: BucketListItemType = {
-            ...newItem,
-            key: key.key,
-            created: Date.now(),
-            completed: false,
-            expectedCompletion: "",
-            // Possible fields to add
-            // progress: "",
-            // steps: [],
-            // images: [],
-        };
-        key.set(final).then((res: any) => {
-            console.log(res);
-            let finalItems: Array<BucketListItemType> = [...items, final];
-            setItems(finalItems);
-            clearNewItem();
-        })
-        .catch((err: any) => {
-            console.log(err);
-        })
-    }
-
-    const clearNewItem = () => { setNewItem({ name: "", description: "", notes: "" }); }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        setNewItem({ ...newItem, [e.target.name]: e.target.value });
-    }
+    const handleAdd = (newItem: BucketListItemType) => { setItems([...items, newItem]); setAddOpen(false); }
 
     const formatCompletedCol = (rowData: BucketListItemType) => (
         <span>
@@ -115,7 +84,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
                 <Column field="description" header="Description"></Column>
                 <Column field="notes" header="Notes"></Column>
             </DataTable>
-            <AddItemDialog open={addOpen} onHide={() => setAddOpen(false)} />
+            <AddItemDialog onSave={handleAdd} open={addOpen} onHide={() => setAddOpen(false)} />
         </div>
     );
 }
