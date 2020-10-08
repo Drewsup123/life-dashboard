@@ -32,14 +32,24 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
     const [items, setItems] = React.useState([] as any);
     const [globalFilter, setGlobalFilter] = React.useState(null as any);
     const [addOpen, setAddOpen] = React.useState(false);
+    const [editKey, setEditKey] = React.useState(null as null | string);
 
     const handleAdd = (newItem: BucketListItemType) => { setItems([...items, newItem]); setAddOpen(false); }
 
-    const formatCompletedCol = (rowData: BucketListItemType) => (
-        <span>
+    const toggleEdit = (key: string) => {
+        setEditKey(key);
+    }
+
+    const formatCompletedCol = (rowData: BucketListItemType) => (<span>
             <i className={`material-icons ${rowData.completed ? "text-success" : "text-danger"}`}>{rowData.completed ? "check_circle" : "cancel"}</i>
-        </span>
-    );
+        </span>);
+
+    const renderActions = (rowData: BucketListItemType) => <div>
+        <Button onClick={(e: React.SyntheticEvent) => toggleEdit(rowData.key)} className="d-flex justify-content-between align-items-center ml-auto">
+            <i className="material-icons">edit</i>
+            <span>Edit</span>
+        </Button>
+    </div>
 
     React.useEffect(() => {
         setLoading(true);
@@ -93,6 +103,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="description" header="Description"></Column>
                     <Column field="notes" header="Notes"></Column>
+                    <Column field="actions" header="" body={renderActions}></Column>
                 </DataTable>
             }
             <AddItemDialog onSave={handleAdd} open={addOpen} onHide={() => setAddOpen(false)} />
