@@ -99,7 +99,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
                     </div>
                     }
                 >
-                    <Column field="completed" header="" body={formatCompletedCol}></Column>
+                    <Column style={{width: 50}} field="completed" header="" body={formatCompletedCol}></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="description" header="Description"></Column>
                     <Column field="notes" header="Notes"></Column>
