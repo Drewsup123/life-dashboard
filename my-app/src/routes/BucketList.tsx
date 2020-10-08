@@ -2,13 +2,16 @@ import React from 'react';
 import firebase from 'firebase';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import BucketListItem from '../components/BucketList/BucketListItem';
 const database = firebase.database();
 
 export interface IProps {
     UID: string;
 }
 
-type BucketListItem = {
+export type BucketListItemType = {
     name: string;
     description: string;
     notes: string;
@@ -18,7 +21,7 @@ type BucketListItem = {
     key: string;
 }
 
-const BucketList: React.SFC<IProps> = (props: IProps) => {
+const BucketList: React.FC<IProps> = (props: IProps) => {
     const { UID } = props;
     const [items, setItems] = React.useState([] as any);
     const [newItem, setNewItem] = React.useState({ name: "", description: "", notes: "" } as any);
@@ -26,7 +29,7 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
     const addItem = (e: React.SyntheticEvent) => {
         e.preventDefault();
         let key:any = database.ref("/bucket-list/" + UID).push();
-        let final: BucketListItem = {
+        let final: BucketListItemType = {
             ...newItem,
             key: key.key,
             created: Date.now(),
@@ -34,11 +37,11 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
             expectedCompletion: "",
             // Possible fields to add
             // progress: "",
-            // steps: [],
+            // steps: []
         };
         key.set(final).then((res: any) => {
             console.log(res);
-            let finalItems: Array<BucketListItem> = [...items, final];
+            let finalItems: Array<BucketListItemType> = [...items, final];
             setItems(finalItems);
             clearNewItem();
         })
@@ -69,12 +72,24 @@ const BucketList: React.SFC<IProps> = (props: IProps) => {
     return (
         <div>
             <h1>Bucket List</h1>
+            <div className="col-12 col-md-12">
             {Object.keys(newItem).map((key: string) => (
-                <input key={key} type="text" name={key} value={newItem[key]} onChange={handleChange} placeholder={key} />
+                <InputText className="col-12 col-md-3" key={key} type="text" name={key} value={newItem[key]} onChange={handleChange} placeholder={key} />
             ))}
-            <button onClick={addItem}>Add Item</button>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-                {items.map((item: BucketListItem, index: number) => <div key={item.key}>{item.name}</div>)}
+            <Button className="col-3" label="Add Item" onClick={addItem} />
+            </div>
+            {/* <button onClick={addItem}>Add Item</button> */}
+            <div className="bucket-list-container">
+                <div className="bucket-list-list-header">
+                    <span>Name</span>
+                    <span>Description</span>
+                    <span>Created On</span>
+                    <span>Completed</span>
+                    <span>Notes</span>
+                </div>
+                {items.map((item: BucketListItemType, index: number) => (
+                    <BucketListItem {...item} />
+                ))}
             </div>
         </div>
     );
