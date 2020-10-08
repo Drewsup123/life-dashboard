@@ -40,6 +40,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
     const toggleEdit = (key: string | null) => {
         if(key === null){ setToEdit(null); return; }
         let found: any = items.findIndex((item: any) => item.key === key);
+        console.log("found index", found, items[found]);
         if(found >= 0){ setToEdit(items[found]); }
     }
 
@@ -110,7 +111,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
                 </DataTable>
             }
             <AddItemDialog onSave={handleAdd} open={addOpen} onHide={() => setAddOpen(false)} />
-            <EditItemDialog onHide={() => toggleEdit(null)} original={toEdit} />
+            <EditItemDialog onHide={() => toggleEdit(null)} key={String(toEdit)} original={toEdit} />
         </div>
     );
 }
