@@ -2,15 +2,15 @@ import React from 'react';
 import { Dialog } from 'primereact/dialog';
 
 export interface IProps {
-    id: string | null;
     original: any;
+    onHide: any;
 }
 
 const EditItemDialog: React.SFC<IProps> = (props: IProps) => {
-    const { id, original } = props;
+    const { original, onHide } = props;
     const [edits, setEdits] = React.useState(original);
     return (
-        <Dialog visible={id !== null} onHide={() => null}>
+        <Dialog visible={original !== null} onHide={onHide}>
             <div>
 
             </div>

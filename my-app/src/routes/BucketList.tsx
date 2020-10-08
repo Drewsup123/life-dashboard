@@ -33,15 +33,14 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
     const [items, setItems] = React.useState([] as any);
     const [globalFilter, setGlobalFilter] = React.useState(null as any);
     const [addOpen, setAddOpen] = React.useState(false);
-    const [editKey, setEditKey] = React.useState(null as null | string);
     const [toEdit, setToEdit] = React.useState(null as any);
 
     const handleAdd = (newItem: BucketListItemType) => { setItems([...items, newItem]); setAddOpen(false); }
 
-    const toggleEdit = (key: string) => {
-        setEditKey(key);
+    const toggleEdit = (key: string | null) => {
+        if(key === null){ setToEdit(null); return; }
         let found: any = items.findIndex((item: any) => item.key === key);
-        setToEdit(items[found]);
+        if(found >= 0){ setToEdit(items[found]); }
     }
 
     const formatCompletedCol = (rowData: BucketListItemType) => (<span>
@@ -111,7 +110,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
                 </DataTable>
             }
             <AddItemDialog onSave={handleAdd} open={addOpen} onHide={() => setAddOpen(false)} />
-            <EditItemDialog id={editKey} original={toEdit} />
+            <EditItemDialog onHide={() => toggleEdit(null)} original={toEdit} />
         </div>
     );
 }
