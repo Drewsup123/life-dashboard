@@ -59,6 +59,11 @@ const routes: Array<RouteItem> = [
         linkTo: "journal",
         label: "Journal/Mood Tracker",
         icon: "mood"
+    },
+    { //ref https://medium.com/better-programming/build-a-timeline-component-with-react-and-react-chrono-fb1b962b020e
+        linkTo: "timeline",
+        label: "Life Timeline",
+        icon: "art_track"
     }
 ];
 

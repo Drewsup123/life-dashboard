@@ -9,6 +9,7 @@ A dashboard to keep track of life or something. Idk I haven't thought it all the
 - Journal / thought tracker
 - Reminders / todo lists
 - Notes
+- life timeline
 
 ## Available domain names / possible website names
 - refreshdash.com
