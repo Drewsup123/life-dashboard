@@ -19,7 +19,9 @@ const EditItemDialog: React.SFC<IProps> = (props: IProps) => {
         setEdits({ ...edits, [e?.target.name]: e?.target.value });
     }
 
-    const handleProgressChange = (e: any) => { setEdits({ ...edits, progress: e.value }) }
+    const handleProgressChange = (e: any) => { 
+        setEdits({ ...edits, progress: e.value, completed: e.value === 100 ? true : original.completed }); 
+    }
 
     const toggleCompleted = (e: any) => { setEdits({ ...edits, completed: !edits.completed }) }
 
@@ -46,21 +48,6 @@ const EditItemDialog: React.SFC<IProps> = (props: IProps) => {
                     <label htmlFor="progress-input">Progress: {edits.progress}</label>
                     <Slider id="progress-input" className="w-100" min={0} max={100} value={edits.progress} onChange={handleProgressChange} />
                 </span>
-                {/* {
-                    edits&&Object.keys(edits).map(key => {
-                        if(key === "images" || key === "key"){
-                            // ? edge case
-                            return null
-                        }
-                        if(key === "progress"){
-                            return <Slider className="w-100" min={0} max={100} key={key} value={edits[key]} onChange={(e: any) => handleChange(e, "slider")} range />
-                            // return(<InputNumber className="w-100 mb-3" key={key} name={key} value={edits[key]} onValueChange={(e: any) => handleChange(e)} />)
-                        }
-                        else{
-                            return( <InputText className="w-100 mb-3" key={key} name={key} value={edits[key]} onChange={handleChange} /> )
-                        }
-                    })
-                } */}
             </div>
         </Dialog>
     );
