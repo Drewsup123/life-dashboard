@@ -113,7 +113,7 @@ const BucketList: React.FC<IProps> = (props: IProps) => {
                 </DataTable>
             }
             <AddItemDialog onSave={handleAdd} open={addOpen} onHide={() => setAddOpen(false)} />
-            <EditItemDialog onHide={() => toggleEdit(null)} key={String(toEdit)} original={toEdit} />
+            {toEdit ? <EditItemDialog onHide={() => toggleEdit(null)} key={String(toEdit)} original={toEdit} /> : null}
         </div>
     );
 }
