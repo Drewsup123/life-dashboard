@@ -18,7 +18,7 @@ const Reminder = lazy(() => import("./routes/Reminder"));
 const Schedule = lazy(() => import("./routes/Schedule"));
 const Todo = lazy(() => import("./routes/Todo"));
 const Subscription = lazy(() => import("./routes/Subscription"));
-const LifeCalendar = lazy(() => import("./routes/LifeCalendar"));
+const Life_Calendar = lazy(() => import("./routes/LifeCalendar.jsx"));
 const Journal = lazy(() => import("./routes/Journal"));
 const InvalidRoute = lazy(() => import("./routes/InvalidRoute"));
 
@@ -63,7 +63,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
                     <Route path="/overview" render={() => <Overview />} />
                     <Route path="/profile" render={() => <Profile />} />
                     <Route path="/subscription" render={() => <Subscription />} />
-                    <Route path="/life-calendar" render={() => <LifeCalendar />} />
+                    <Route path="/life-calendar" render={() => <Life_Calendar />} />
                     <Route path="/journal" render={() => <Journal />} />
                   </React.Fragment>
                 )}
