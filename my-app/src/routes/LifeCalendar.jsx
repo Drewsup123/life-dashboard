@@ -23,7 +23,7 @@ const Life_Calendar = (props) => {
             width: window.innerWidth - 100,
             height: window.innerHeight
         })
-    })
+    }, [])
 
     return (
         <LifeCalendar
